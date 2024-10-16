@@ -13,7 +13,7 @@ class Indexer:
             title=TEXT(stored=True),
             content=TEXT,
             path=ID(stored=True),
-            author=TEXT(stored=True, default="Unknown Author"),  # Optional field with default
+            author=TEXT(stored=True),  # Optional field with default
             date=DATETIME(stored=True)  # Optional field
         )
         if not os.path.exists(self.index_dir):
