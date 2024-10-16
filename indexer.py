@@ -10,7 +10,7 @@ class Indexer:
         self.index_dir = index_dir
         self.schema = Schema(
             title=TEXT(stored=True),
-            content=TEXT,
+            content=TEXT(stored=True),
             path=ID(stored=True),
             author=TEXT(stored=True),  # Optional field with default
         )
