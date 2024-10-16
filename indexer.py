@@ -19,7 +19,12 @@ def create_index(index_dir):
     ix = create_in(index_dir, schema)
     return ix
 
-def add_document_to_index(ix, url, content):
+def add_document_to_index(ix, title, url, content, author):
     writer = ix.writer()
-    writer.add_document(url=url, content=content)
+    writer.add_document(
+        title=title,
+        url=url, 
+        content=content,
+        author=author
+        )
     writer.commit()
