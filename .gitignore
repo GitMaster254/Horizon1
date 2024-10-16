@@ -23,3 +23,5 @@ coverage.xml
 # Temporary files
 *.swp
 *~
+#Generated data
+index/
