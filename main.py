@@ -6,7 +6,7 @@ def main():
     index_dir = "index"
     
     # Create the index
-    indexer = indexer(index_dir)
+    indexer = Indexer(index_dir)
 
     # Crawl the local directory for files to index
     directory = r"C:\Users\Hedmon\OneDrive\Documents\ReadMe"  # Specify your local directory
@@ -19,8 +19,10 @@ def main():
             print(f"Indexing {file_path}...")
             indexer.add_document_to_index(file_path, text)
 
+    searcher = Searcher(index_dir)
+
     query = input("Enter your search query: ")
-    results = Searcher.search_index(query)
+    results = searcher.search_index(query)
     
     if results:
         for url,excerpt in results:
