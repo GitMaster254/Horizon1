@@ -17,7 +17,7 @@ def main():
         text = Crawler.read_file(file_path)  # Read content from the file
         if text:  # Ensure the text is not None
             print(f"Indexing {file_path}...")
-            indexer.add_document_to_index(file_path, text)
+            indexer.add_document(file_path, text)
 
     searcher = Searcher(index_dir)
 
