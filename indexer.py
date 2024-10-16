@@ -5,8 +5,10 @@ import os
 
 def create_index(index_dir):
     schema = Schema(
+    title=TEXT(stored=True, optional=True),  # Store the title
     url=ID(stored=True),
-    content=TEXT(stored=True)  # Store the text content
+    content=TEXT(stored=True), # Store the text content
+    author=TEXT(stored=True, optional=True),  # Optional field
     )
 
     # Create the index directory if it doesn't exist
