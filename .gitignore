@@ -1,0 +1,25 @@
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# CPython bytecode files
+.py[co]
+
+# Virtual environment directories
+venv/
+.venv/
+env/
+
+# Test results
+test-results/
+coverage.xml
+
+# IDE-specific files
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary files
+*.swp
+*~
