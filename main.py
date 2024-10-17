@@ -49,9 +49,5 @@ def main():
     else:
         print("No results found.")
 
-def highlight(excerpt):
-    # Highlight the query term in the text
-    return excerpt.replace("<b>", "\033[1m").replace("</b>", "\033[0m")
-
 if __name__ == "__main__":
     main()
