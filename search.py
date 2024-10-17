@@ -11,4 +11,4 @@ class Searcher:
             query_parser = QueryParser("content", ix.schema)
             query = query_parser.parse(query_str)
             results = searcher.search(query)
-            return [(result['path'], result.highlights("content")) for result in results]
+            return [(result['path'], result.highlight("content"), result['title'], result['author']) for result in results]
