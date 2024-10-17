@@ -28,6 +28,7 @@ def main():
         content = crawler.read_file(file_path)  # Read content from the file
         if content:  # Ensure the text is not None
             print(f"Indexing {file_path}...")
+            title= get_title(content)
             document = {
                 "title": os.path.basename(file_path),
                 "content": text,
