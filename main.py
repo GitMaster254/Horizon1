@@ -43,7 +43,9 @@ def main():
     results = searcher.search_index(query)
     
     if results:
-        for path,excerpt in results:
+        for path,excerpt,author,title in results:
+            print(f"Title: {title}")
+            print(f"Author: {author}")
             print(f"Found in: {path}")
             print(f"Excerpt: {highlight(excerpt)}\n")  # Use highlights for better readability
     else:
