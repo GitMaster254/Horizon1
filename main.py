@@ -25,8 +25,8 @@ def main():
 
     # Index the files found
     for file_path in file_paths:
-        text = Crawler.read_file(file_path)  # Read content from the file
-        if text:  # Ensure the text is not None
+        content = crawler.read_file(file_path)  # Read content from the file
+        if content:  # Ensure the text is not None
             print(f"Indexing {file_path}...")
             document = {
                 "title": os.path.basename(file_path),
