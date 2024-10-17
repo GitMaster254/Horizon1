@@ -47,7 +47,7 @@ def main():
             print(f"Title: {title}")
             print(f"Author: {author}")
             print(f"Found in: {path}")
-            print(f"Excerpt: {highlight(excerpt)}\n")  # Use highlights for better readability
+            print(f"Excerpt: {highlight(excerpt,query)}\n")  # Use highlights for better readability
     else:
         print("No results found.")
 
