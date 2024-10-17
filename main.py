@@ -30,8 +30,8 @@ def main():
             print(f"Indexing {file_path}...")
             title= get_title(content)
             document = {
-                "title": os.path.basename(file_path),
-                "content": text,
+                "title": title,
+                "content": content,
                 "path": file_path,
                 "author": "Author Name", 
             }
