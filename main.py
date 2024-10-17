@@ -35,7 +35,7 @@ def main():
                 "path": file_path,
                 "author": "Unknown Author"
             }
-    indexer.add_document(file_path, text)
+            indexer.add_document(document)
 
     searcher = Searcher(index_dir)
 
