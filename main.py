@@ -1,7 +1,16 @@
 from indexer import Indexer
 from search import Searcher
 from crawler import Crawler
-import os
+import os,re
+
+def highlight(results,query):
+    plain_text=re.sub(r'<.*?>', '', results)
+    highlighted_text=re.sub(query, f'<b>{query}</b>', plain_text, flags=re.IGNORECASE)
+    return highlighted_text
+
+def get_title(content):
+    lines = content.splitlines()
+    return lines[0] if lines else "Untitled"
 
 def main():
     index_dir = "index"
