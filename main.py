@@ -1,35 +1,60 @@
-import indexer
-import search
-import crawler
+from indexer import Indexer
+from search import Searcher
+from crawler import Crawler
+import sys,re
+
+def highlight(result,query):
+    plain_text=re.sub(r'<.*?>', '', result)
+    highlighted_text=re.sub(query, f'**{query}**', plain_text, flags=re.IGNORECASE)
+    return highlighted_text
+
+def get_title(content):
+    lines = content.splitlines()
+    return lines[0] if lines else "Untitled"
 
 def main():
     index_dir = "index"
     
     # Create the index
-    ix = indexer.create_index(index_dir)
+    indexer = Indexer(index_dir)
 
     # Crawl the local directory for files to index
-    directory = r"C:\Users\Hedmon\OneDrive\Documents\ReadMe"  # Specify your local directory
+    
+    crawler = Crawler()
     file_paths = crawler.crawl_directory(directory)
 
     # Index the files found
     for file_path in file_paths:
-        text = crawler.read_file(file_path)  # Read content from the file
-        if text:  # Ensure the text is not None
+        content = crawler.read_file(file_path)  # Read content from the file
+        if content:  # Ensure the text is not None
             print(f"Indexing {file_path}...")
-            indexer.add_document_to_index(ix, file_path, text)
+            title= get_title(content)
+            document = {
+                "title": title,
+                "content": content,
+                "path": file_path,
+                "author": "Unknown Author"
+            }
+            indexer.add_document(document)
 
-    # Perform a search query 
+    searcher = Searcher(index_dir)
+
     query = input("Enter your search query: ")
-    results = search.search_index(index_dir, query)
+    results = searcher.search_index(query)
     
-    # Display search results
     if results:
-        for url,excerpt in results:
-            print(f"Found in: {url}")
-            print(f"Excerpt: {excerpt}\n")  # Use highlights for better readability
+        for path,excerpt,author,title in results:
+            print(f"Title: {title}")
+            print(f"Author: {author}")
+            print(f"Found in: {path}")
+            print(f"Excerpt: {highlight(excerpt,query)}\n")  # Use highlights for better readability
     else:
         print("No results found.")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        directory = sys.argv[1]
+    else:
+        directory = r"C:\Users\Hedmon\OneDrive\Documents\ReadMe"  # Default directory if not passed
+    
+    main(directory)

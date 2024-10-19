@@ -1,26 +1,14 @@
-#implements the search functionality
-from whoosh.index import open_dir #library for searching
-from whoosh.query import Term, And, Or
-from whoosh.qparser import QueryParser  # Import for parsing queries
+from whoosh.index import open_dir
+from whoosh.qparser import QueryParser
 
+class Searcher:
+    def __init__(self, index_dir):
+        self.index_dir = index_dir
 
-def search_index(index_dir, query_str):
-    #open the existing index
-    ix = open_dir(index_dir)
-
-    #use the searcher to search the index
-    with ix.searcher() as searcher:
-        # Define a query parser for the 'content' field
-        query_parser = QueryParser("content", ix.schema)
-        
-        # Parse the query string
-        query = query_parser.parse(query_str)
-        
-        # Perform the search
-        results = searcher.search(query)
-        
-        # Collect and return the results
-        return [(
-            result['url'], 
-            result.highlights("content")
-             )for result in results]
+    def search_index(self, query_str):
+        ix = open_dir(self.index_dir)
+        with ix.searcher() as searcher:
+            query_parser = QueryParser("content", ix.schema)
+            query = query_parser.parse(query_str)
+            results = searcher.search(query)
+            return [(result['path'], result.highlights("content"), result['title'], result['author']) for result in results]
