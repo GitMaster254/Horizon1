@@ -52,4 +52,9 @@ def main():
         print("No results found.")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        directory = sys.argv[1]
+    else:
+        directory = r"C:\Users\Hedmon\OneDrive\Documents\ReadMe"  # Default directory if not passed
+    
+    main(directory)
