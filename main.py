@@ -19,7 +19,7 @@ def main():
     indexer = Indexer(index_dir)
 
     # Crawl the local directory for files to index
-    directory = r"C:\Users\Hedmon\OneDrive\Documents\ReadMe"
+    
     crawler = Crawler()
     file_paths = crawler.crawl_directory(directory)
 
