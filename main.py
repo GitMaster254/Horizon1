@@ -3,9 +3,9 @@ from search import Searcher
 from crawler import Crawler
 import sys,re
 
-def highlight(results,query):
-    plain_text=re.sub(r'<.*?>', '', results)
-    highlighted_text=re.sub(query, f'<b>{query}</b>', plain_text, flags=re.IGNORECASE)
+def highlight(result,query):
+    plain_text=re.sub(r'<.*?>', '', result)
+    highlighted_text=re.sub(query, f'**{query}**', plain_text, flags=re.IGNORECASE)
     return highlighted_text
 
 def get_title(content):
