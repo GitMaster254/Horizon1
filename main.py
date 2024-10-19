@@ -1,7 +1,7 @@
 from indexer import Indexer
 from search import Searcher
 from crawler import Crawler
-import os,re
+import sys,re
 
 def highlight(results,query):
     plain_text=re.sub(r'<.*?>', '', results)
