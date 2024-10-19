@@ -11,7 +11,7 @@ class Indexer:
         self.schema = Schema(
             title=TEXT(stored=True),
             content=TEXT(stored=True),
-            path=ID(stored=True),
+            path=ID(stored=True,unique=True),
             author=TEXT(stored=True),  # Optional field with default
         )
         if not os.path.exists(self.index_dir):
