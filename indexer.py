@@ -35,3 +35,9 @@ class Indexer:
             metadata=json.dumps(metadata or {})
         )
         writer.commit()
+    def remove_document(self, file_path):
+        index = open_dir(self.index_dir)
+        writer = AsyncWriter(index)
+
+        writer.delete_by_term('path', file_path)
+        writer.commit()
