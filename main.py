@@ -50,6 +50,10 @@ def main(directory):
 
     print(f"\n[Success] Indexed {indexed_count} file(s). You can now search!\n")
 
+    # Start the file watcher in a separate thread
+    watcher_thread = threading.Thread(target=start_watching, args=(indexer,), daemon=True)
+    watcher_thread.start()
+    print("[Watcher] Watching for file changes...\n")
     searcher = Searcher(index_dir)
     while True:
         query = input("Enter your search query (or type 'exit' to quit): ").strip()
