@@ -1,19 +1,19 @@
 import os
 
 class Crawler:
-    @staticmethod
-    def crawl_directory(directory):
+
+    def crawl_directory(self,directory):
         file_paths = []
         # Traverse the directory
         for root, dirs, files in os.walk(directory):
             for file in files:
                 # Filter for specific file types (add more extensions as needed)
-                if file.endswith(('.txt', '.docx', '.doc', 'pdf')):
+                if file.endswith(('.txt', '.docx', '.doc', '.pdf')):
                     file_paths.append(os.path.join(root, file))
         return file_paths
 
-    @staticmethod
-    def read_file(file_path):
+
+    def read_file(self,file_path):
         """Reads the content from a given file based on its extension."""
         try:
             if file_path.endswith('.txt'):
@@ -24,6 +24,9 @@ class Crawler:
                 import docx  # Ensure you have the python-docx library installed
                 doc = docx.Document(file_path)
                 return '\n'.join([para.text for para in doc.paragraphs])
+            elif file_path.endswith('.doc'):
+                import textract
+                return textract.process(file_path).decode('utf-8')
             elif file_path.endswith('.pdf'):
                 from PyPDF2 import PdfReader  # Ensure you have PyPDF2 installed
                 pdf_reader = PdfReader(file_path)
