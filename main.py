@@ -1,10 +1,12 @@
 from indexer import Indexer
 from search import Searcher
 from crawler import Crawler
+from watcher import start_watching
 import sys
 import re
 import os
 import json
+import threading
 
 def highlight(result, query):
     plain_text = re.sub(r'<.*?>', '', result)
